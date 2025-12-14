@@ -202,10 +202,17 @@
 +  // Returns the rightmost boundary of the selectable region, aka
 +  // the space where the user can click to select the tab.
 +  //
-+  // This area is between the alert indicator (if visible) and the close
-+  // button (if visible). It's used by AlertIndicatorButton to determine
-+  // if there's enough safe click area to enable the mute toggle on
-+  // inactive tabs.
++  // For pinned tabs, the entire tab width is selectable since they don't
++  // have close buttons and the alert indicator should not block dragging.
++  // For regular tabs, this area is between the alert indicator (if visible)
++  // and the close button (if visible). It's used by AlertIndicatorButton
++  // to determine if there's enough safe click area to enable the mute
++  // toggle on inactive tabs.
++
++  // For pinned tabs, allow dragging on the entire tab
++  if (data().pinned) {
++    return width();
++  }
 +
 +  int selectable_region = width();
 +
